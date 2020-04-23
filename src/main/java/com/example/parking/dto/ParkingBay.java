@@ -2,6 +2,7 @@ package com.example.parking.dto;
 
 import com.example.parking.utils.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.time.LocalDateTime;
 
 public class ParkingBay {
 
@@ -14,6 +15,8 @@ public class ParkingBay {
 	private Integer distanceToExit = Integer.MAX_VALUE;
 
 	private char parkedCar;
+
+	private LocalDateTime parkedTime;
 
 	@JsonIgnore
 	private Parking parking;
@@ -110,5 +113,15 @@ public class ParkingBay {
 	public void setPedestrianExit(boolean pedestrianExit) {
 
 		this.pedestrianExit = pedestrianExit;
+	}
+
+	public LocalDateTime getParkedTime() {
+
+		return parkedTime;
+	}
+
+	public void setParkedTime(LocalDateTime parkedTime) {
+
+		this.parkedTime = parkedTime;
 	}
 }

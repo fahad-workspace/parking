@@ -3,18 +3,43 @@ package com.example.parking.cache;
 import com.example.parking.dto.Parking;
 import com.example.parking.dto.ParkingBay;
 import com.example.parking.dto.ParkingBayKey;
+import com.example.parking.dto.ParkingCharges;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
+import javax.annotation.PostConstruct;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SimpleCacheService {
 
+	@Value("${weekday.charges}")
+	private String weekdayRates;
+
+	@Value("${weekend.charges}")
+	private String weekendRates;
+
 	private Map<Long, Parking> parkingMap = new LinkedHashMap<>();
+
+	private final Set<ParkingCharges> weekdayCharges = new TreeSet<>();
+
+	private final Set<ParkingCharges> weekendCharges = new TreeSet<>();
+
+	@PostConstruct
+	public void init() {
+
+		Arrays.stream(weekdayRates.split(",")).map(StringUtils::trim).map(charges -> new ParkingCharges(Integer.parseInt(StringUtils.trim(charges.split(":")[0])),
+				Integer.parseInt(StringUtils.trim(charges.split(":")[1])))).forEachOrdered(weekdayCharges::add);
+		Arrays.stream(weekendRates.split(",")).map(StringUtils::trim).map(charges -> new ParkingCharges(Integer.parseInt(StringUtils.trim(charges.split(":")[0])),
+				Integer.parseInt(StringUtils.trim(charges.split(":")[1])))).forEachOrdered(weekendCharges::add);
+	}
 
 	public Map<Long, Parking> getParkingMap() {
 
@@ -57,5 +82,15 @@ public class SimpleCacheService {
 					.collect(Collectors.toCollection(LinkedHashSet::new)));
 			parkingMap.put(parkingBayKey.getBayId(), parking);
 		});
+	}
+
+	public Set<ParkingCharges> getWeekdayCharges() {
+
+		return weekdayCharges;
+	}
+
+	public Set<ParkingCharges> getWeekendCharges() {
+
+		return weekendCharges;
 	}
 }
