@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="false">
+	<contextName>parking</contextName>
+	<logger name="org.springframework" level="OFF"/>
+	<logger name="org.apache" level="OFF"/>
+	<appender name="STDOUT"
+			class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} %-4relative %highlight(%-5level) %cyan(%logger{35}) - %magenta(%msg%n)</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+	</appender>
+	<root level="DEBUG">
+		<appender-ref ref="STDOUT"/>
+	</root>
+	<logger name="com.challenge.parking" level="INFO"
+			additivity="false">
+		<appender-ref ref="STDOUT"/>
+	</logger>
+</configuration>
