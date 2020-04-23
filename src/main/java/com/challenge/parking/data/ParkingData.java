@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Fahad Sarwar
+ */
 public class ParkingData implements Serializable {
 
 	private static final long serialVersionUID = 8846318259381738892L;

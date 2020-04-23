@@ -1,5 +1,8 @@
 package com.challenge.parking.utils;
 
+/**
+ * @author Fahad Sarwar
+ */
 public class Constants {
 
 	public static final char PEDESTRIAN_EXIT = 'X';

@@ -33,3 +33,7 @@ Server will start listening on port `8080`. Example [http://localhost:8080]().
 [Print parking](#print-parking)  
 
 All available Rest APIs can be accessed on [http://localhost:8080/swagger-ui.html]().
+
+## Admin Report
+
+Admin report can be accessed on [http://localhost:8080/swagger-ui.html#/reporting-controller/generateReportUsingGET]().

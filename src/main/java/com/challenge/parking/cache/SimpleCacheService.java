@@ -17,6 +17,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author Fahad Sarwar
+ */
 @Service
 public class SimpleCacheService {
 

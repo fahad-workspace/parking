@@ -6,6 +6,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.StringJoiner;
 
+/**
+ * @author Fahad Sarwar
+ */
 public class ParkingBay implements Serializable {
 
 	private static final long serialVersionUID = -6266603908467437884L;

@@ -2,6 +2,9 @@ package com.challenge.parking.dto;
 
 import java.io.Serializable;
 
+/**
+ * @author Fahad Sarwar
+ */
 public class ParkingCharges implements Serializable, Comparable<ParkingCharges> {
 
 	private static final long serialVersionUID = -9180034320511521234L;

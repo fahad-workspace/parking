@@ -8,7 +8,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 /**
- * This AOP class will automatically log the entry and exit of all the methods in the project.
+ * @author Fahad Sarwar
  */
 @Component
 @Aspect

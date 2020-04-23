@@ -2,6 +2,9 @@ package com.challenge.parking.dto;
 
 import java.io.Serializable;
 
+/**
+ * @author Fahad Sarwar
+ */
 public class Report implements Serializable {
 
 	private static final long serialVersionUID = 7886618884214461544L;

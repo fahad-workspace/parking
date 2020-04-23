@@ -2,6 +2,9 @@ package com.challenge.parking.dto;
 
 import java.io.Serializable;
 
+/**
+ * @author Fahad Sarwar
+ */
 public class ParkingBayKey implements Serializable {
 
 	private static final long serialVersionUID = -6508336115629390465L;

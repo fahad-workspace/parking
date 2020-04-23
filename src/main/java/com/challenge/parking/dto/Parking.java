@@ -8,6 +8,9 @@ import java.util.Set;
 import java.util.StringJoiner;
 import java.util.TreeMap;
 
+/**
+ * @author Fahad Sarwar
+ */
 public class Parking implements Serializable {
 
 	private static final long serialVersionUID = -4633257513012532565L;

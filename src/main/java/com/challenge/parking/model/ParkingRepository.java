@@ -4,6 +4,9 @@ import com.challenge.parking.dto.Parking;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @author Fahad Sarwar
+ */
 @Repository
 public interface ParkingRepository {
 

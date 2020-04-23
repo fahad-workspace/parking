@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 /**
- * This AOP class will log the time for execution of every single method in the project.
+ * @author Fahad Sarwar
  */
 @Component
 public class AOPTimeLogger {

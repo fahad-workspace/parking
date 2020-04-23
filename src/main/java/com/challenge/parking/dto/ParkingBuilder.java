@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Builder class to get a parking instance
+ * @author Fahad Sarwar
  */
 public class ParkingBuilder implements Serializable {
 

@@ -11,6 +11,9 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Fahad Sarwar
+ */
 @Component
 public class ReportingService {
 
