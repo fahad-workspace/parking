@@ -50,11 +50,7 @@ public class ParkingBay implements Serializable {
 
 	public void initializeParkedCar() {
 
-		if (pedestrianExit) {
-			parkedCar = Constants.PEDESTRIAN_EXIT;
-		} else {
-			parkedCar = Constants.EMPTY;
-		}
+		parkedCar = pedestrianExit ? Constants.PEDESTRIAN_EXIT : Constants.EMPTY;
 	}
 
 	public Long getBayId() {

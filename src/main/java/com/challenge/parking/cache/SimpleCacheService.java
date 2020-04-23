@@ -42,12 +42,7 @@ public class SimpleCacheService {
 		Map<ParkingBayKey, ParkingBay> parkingBayMap = null;
 		if (parking != null) {
 			Set<ParkingBay> bays = parking.getBays();
-			for (ParkingBay parkingBay : bays) {
-				if (parkingBay.getIndex().equals(index)) {
-					bay = parkingBay;
-					break;
-				}
-			}
+			bay = bays.stream().filter(parkingBay -> parkingBay.getIndex().equals(index)).findFirst().orElse(null);
 		}
 		if (bay != null) {
 			ParkingBayKey parkingBayKey = new ParkingBayKey(id, index);

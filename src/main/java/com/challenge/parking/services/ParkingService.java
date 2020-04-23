@@ -51,9 +51,7 @@ public class ParkingService {
 	public Parking createParking(ParkingData parkingData) {
 
 		ParkingBuilder parkingBuilder = new ParkingBuilder().withSquareSize(parkingData.getSize());
-		for (Integer i : parkingData.getPedestrianExits()) {
-			parkingBuilder.withPedestrianExit(i);
-		}
+		parkingData.getPedestrianExits().forEach(parkingBuilder::withPedestrianExit);
 		Parking parking = parkingBuilder.build();
 		parkingRepository.save(parking);
 		return parking;
