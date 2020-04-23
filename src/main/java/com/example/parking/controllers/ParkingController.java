@@ -28,8 +28,7 @@ public class ParkingController {
 	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> createParking(@RequestBody ParkingData parkingData) {
 
-		Parking parking = service.createParking(parkingData);
-		return new ResponseEntity<>(parking, HttpStatus.OK);
+		return new ResponseEntity<>(service.createParking(parkingData), HttpStatus.OK);
 	}
 
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -37,8 +36,7 @@ public class ParkingController {
 
 		Parking parking = service.getParkingById(id);
 		if (parking != null) {
-			long free = service.getAvailableBays(parking);
-			return new ResponseEntity<>(free, HttpStatus.OK);
+			return new ResponseEntity<>(service.getAvailableBays(parking), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
@@ -48,8 +46,7 @@ public class ParkingController {
 
 		Parking parking = service.getParkingById(id);
 		if (parking != null) {
-			Integer index = service.parkCar(parking);
-			return new ResponseEntity<>(index, HttpStatus.OK);
+			return new ResponseEntity<>(service.parkCar(parking), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
@@ -59,8 +56,7 @@ public class ParkingController {
 
 		Parking parking = service.getParkingById(id);
 		if (parking != null) {
-			String parkingMap = service.printParking(parking);
-			return new ResponseEntity<>(parkingMap, HttpStatus.OK);
+			return new ResponseEntity<>(service.printParking(parking), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
@@ -70,8 +66,7 @@ public class ParkingController {
 
 		Parking parking = service.getParkingById(id);
 		if (parking != null) {
-			boolean unparked = service.unparkCar(parking, index);
-			return new ResponseEntity<>(unparked, HttpStatus.OK);
+			return new ResponseEntity<>(service.unparkCar(parking, index), HttpStatus.OK);
 		}
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

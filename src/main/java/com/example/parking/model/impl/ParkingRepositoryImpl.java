@@ -4,6 +4,8 @@ import com.example.parking.cache.SimpleCacheService;
 import com.example.parking.dto.Parking;
 import com.example.parking.model.ParkingRepository;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.collections4.CollectionUtils;
@@ -30,6 +32,12 @@ public class ParkingRepositoryImpl implements ParkingRepository {
 		Parking parking = parkingMap.get(id);
 		logger.info("Found :: " + parking);
 		return parking;
+	}
+
+	@Override
+	public List<Parking> getAllParking() {
+
+		return new LinkedList<>(simpleCacheService.getParkingMap().values());
 	}
 
 	@Override

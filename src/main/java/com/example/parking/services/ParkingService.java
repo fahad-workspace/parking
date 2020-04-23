@@ -17,14 +17,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ParkingService {
-
-	private final Logger logger = LogManager.getLogger(ParkingService.class);
 
 	private final ParkingRepository parkingRepository;
 
@@ -32,11 +28,15 @@ public class ParkingService {
 
 	private final SimpleCacheService simpleCacheService;
 
-	public ParkingService(ParkingRepository parkingRepository, ParkingBayRepository parkingBayRepository, SimpleCacheService simpleCacheService) {
+	private final ReportingService reportingService;
+
+	public ParkingService(ParkingRepository parkingRepository, ParkingBayRepository parkingBayRepository, SimpleCacheService simpleCacheService,
+			ReportingService reportingService) {
 
 		this.parkingRepository = parkingRepository;
 		this.parkingBayRepository = parkingBayRepository;
 		this.simpleCacheService = simpleCacheService;
+		this.reportingService = reportingService;
 	}
 
 	/**
@@ -110,16 +110,8 @@ public class ParkingService {
 
 		Parking parking = parkingRepository.findById(parkingId);
 		if (parking != null) {
-			boolean seen = false;
-			ParkingBay best = null;
-			Comparator<ParkingBay> comparator = Comparator.comparing(ParkingBay::getDistanceToExit).thenComparing(ParkingBay::getIndex);
-			for (ParkingBay parkingBay : parking.getBays()) {
-				if (parkingBay.getParkedCar() == Constants.EMPTY && (!seen || comparator.compare(parkingBay, best) < 0)) {
-					seen = true;
-					best = parkingBay;
-				}
-			}
-			Optional<ParkingBay> parkingBayOpt = seen ? Optional.of(best) : Optional.empty();
+			Optional<ParkingBay> parkingBayOpt = parking.getBays().stream().filter(parkingBay -> parkingBay.getParkedCar() == Constants.EMPTY)
+					.min(Comparator.comparing(ParkingBay::getDistanceToExit).thenComparing(ParkingBay::getIndex));
 			if (parkingBayOpt.isPresent()) {
 				return parkingBayOpt.get().getIndex();
 			}
@@ -179,6 +171,7 @@ public class ParkingService {
 				return 0D;
 			}
 			double charges = getParkingCharges(parkingBay);
+			reportingService.updateDailyReport(parking, charges);
 			parkingBay.initializeParkedCar();
 			parkingBayRepository.saveAndFlush(parkingBay);
 			return charges;
@@ -188,7 +181,7 @@ public class ParkingService {
 
 	private double getParkingCharges(ParkingBay parkingBay) {
 
-		long hours = Duration.between(parkingBay.getParkedTime(), LocalDateTime.now()).toMillis() / 1000;
+		long hours = Duration.between(parkingBay.getParkedTime(), LocalDateTime.now()).toHours();
 		double charges = 0D;
 		charges = parkingBay.getParkedTime().getDayOfWeek() == DayOfWeek.SATURDAY || parkingBay.getParkedTime().getDayOfWeek() == DayOfWeek.SUNDAY ? getCharges(hours, charges,
 				simpleCacheService.getWeekendCharges()) : getCharges(hours, charges, simpleCacheService.getWeekdayCharges());

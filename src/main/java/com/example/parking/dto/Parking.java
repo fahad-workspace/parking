@@ -1,13 +1,18 @@
 package com.example.parking.dto;
 
+import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class Parking {
 
 	private Long id;
 
 	private Integer size;
+
+	private Map<LocalDate, Report> dailyReport = new TreeMap<>();
 
 	private Set<ParkingBay> bays = new HashSet<>();
 
@@ -55,5 +60,15 @@ public class Parking {
 	public void setSize(Integer size) {
 
 		this.size = size;
+	}
+
+	public Map<LocalDate, Report> getDailyReport() {
+
+		return dailyReport;
+	}
+
+	public void setDailyReport(Map<LocalDate, Report> dailyReport) {
+
+		this.dailyReport = dailyReport;
 	}
 }
