@@ -5,6 +5,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -12,6 +13,7 @@ import org.springframework.util.StopWatch;
  * @author Fahad Sarwar
  */
 @Component
+@Aspect
 public class AOPTimeLogger {
 
 	private final Logger log = LogManager.getLogger(AOPTimeLogger.class);
