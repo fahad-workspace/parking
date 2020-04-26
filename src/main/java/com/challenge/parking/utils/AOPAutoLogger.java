@@ -6,6 +6,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 /**
  * @author Fahad Sarwar
@@ -23,8 +24,13 @@ public class AOPAutoLogger {
 		try {
 			String startMessageLogger = "Entry -> " + joinPoint.getTarget().getClass().getName() + " - " + joinPoint.getSignature().getName() + "()";
 			log.info(startMessageLogger);
+			StopWatch ticktock = new StopWatch();
+			ticktock.start();
 			retVal = joinPoint.proceed();
-			String endMessageLogger = "Exit -> " + joinPoint.getTarget().getClass().getName() + " - " + joinPoint.getSignature().getName() + "()";
+			ticktock.stop();
+			String endMessageLogger =
+					"Exit -> " + joinPoint.getTarget().getClass().getName() + " - " + joinPoint.getSignature().getName() + "() - Execution Time :: " + ticktock.getTotalTimeMillis()
+							+ " ms.";
 			log.info(endMessageLogger);
 		} catch (Exception ex) {
 			log.error("Exception cause :: " + ex.getMessage(), ex);
